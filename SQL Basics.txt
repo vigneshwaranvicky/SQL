@@ -1,0 +1,92 @@
+Create a database
+	mysql> create database school;
+mysql> use school;
+
+Create a Student Table
+	mysql> create table school (Std_id int primary key auto_increment, std_name varchar(30) not null, sex varchar(10), percentage int not null, s_class int not null, sec varchar(10), stream varchar(10), dob date);
+
+Display the Student Table
+mysql> describe school;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| Std_id     | int         | NO   | PRI | NULL    | auto_increment |
+| std_name   | varchar(30) | NO   |     | NULL    |                |
+| sex        | varchar(10) | YES  |     | NULL    |                |
+| percentage | int         | NO   |     | NULL    |                |
+| s_class    | int         | NO   |     | NULL    |                |
+| sec        | varchar(10) | YES  |     | NULL    |                |
+| stream     | varchar(10) | YES  |     | NULL    |                |
+| dob        | date        | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+
+Insert rocords in the Student Table
+	mysql> insert into school values (1, 'Vicky', 'Male', 76, 12, 'B', 'Commerce','1997-04-25');
+
+Display the Student Table rocords
+	mysql> select * from school;
++--------+-----------+--------+------------+---------+------+----------+------------+
+| Std_id | std_name  | sex    | percentage | s_class | sec  | stream   | dob        |
++--------+-----------+--------+------------+---------+------+----------+------------+
+|      1 | Vicky     | Male   |         76 |      12 | B    | Commerce | 1997-04-25 |
+|      2 | Dinesh    | Male   |         72 |      12 | A    | Science  | 1997-05-08 |
+|      3 | Ragu      | Male   |         81 |      12 | A    | Science  | 1997-06-16 |
+|      4 | Serimathi | Female |         68 |      12 | B    | Commerce | 1996-10-30 |
+|      5 | Gayu      | Female |         86 |      12 | A    | Science  | 1997-06-24 |
+|      6 | Dhaya     | Male   |         80 |      12 | B    | Commerce | 1998-04-13 |
++--------+-----------+--------+------------+---------+------+----------+------------+
+
+Displayed only name and date of birth
+	mysql> select std_name, dob from school;
++-----------+------------+
+| std_name  | dob        |
++-----------+------------+
+| Vicky     | 1997-04-25 |
+| Dinesh    | 1997-05-08 |
+| Ragu      | 1997-06-16 |
+| Serimathi | 1996-10-30 |
+| Gayu      | 1997-06-24 |
+| Dhaya     | 1998-04-13 |
++-----------+------------+
+
+Display student record  where the percentage greater or equal from the school table
+	mysql> select * from school where (percentage) >= 80;
++--------+----------+--------+------------+---------+------+----------+------------+
+| Std_id | std_name | sex    | percentage | s_class | sec  | stream   | dob        |
++--------+----------+--------+------------+---------+------+----------+------------+
+|      3 | Ragu     | Male   |         81 |      12 | A    | Science  | 1997-06-16 |
+|      5 | Gayu     | Female |         86 |      12 | A    | Science  | 1997-06-24 |
+|      6 | Dhaya    | Male   |         80 |      12 | B    | Commerce | 1998-04-13 |
++--------+----------+--------+------------+---------+------+----------+------------+
+
+Display name, stream, percentage where percentage more then 80
+	mysql> select std_name, stream, percentage from school where (percentage) >= 80;
++----------+----------+------------+
+| std_name | stream   | percentage |
++----------+----------+------------+
+| Ragu     | Science  |         81 |
+| Gayu     | Science  |         86 |
+| Dhaya    | Commerce |         80 |
++----------+----------+------------+
+
+Display all record of science student more then 75%
+	mysql> select * from school where stream = 'science' and percentage >= 75;
++--------+----------+--------+------------+---------+------+---------+------------+
+| Std_id | std_name | sex    | percentage | s_class | sec  | stream  | dob        |
++--------+----------+--------+------------+---------+------+---------+------------+
+|      3 | Ragu     | Male   |         81 |      12 | A    | Science | 1997-06-16 |
+|      5 | Gayu     | Female |         86 |      12 | A    | Science | 1997-06-24 |
++--------+----------+--------+------------+---------+------+---------+------------+
+2 rows in set (0.05 sec)
+
+Display name & percentage where the percentage between 60 & 80
+	mysql> select std_name, percentage from school where percentage between 60 and 80;
++-----------+------------+
+| std_name  | percentage |
++-----------+------------+
+| Vicky     |         76 |
+| Dinesh    |         72 |
+| Serimathi |         68 |
+| Dhaya     |         80 |
++-----------+------------+
+4 rows in set (0.00 sec)
